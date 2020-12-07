@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import BoardModel
 
@@ -47,14 +48,22 @@ def loginfunc(request):
             login(request, user)
             # renderはただ単にレンダリングするだけなのでURLは前のページと変わらない　
             # redirectはurls.pyで指定したnameからパスを推測しページを遷移する
-            return redirect('signup')
+            return redirect('list')
         else:
             return redirect('login')
     
     return render(request, 'login.html')
 
 
+# デコレータ→この処理を実行する前に実行するもの
+# ログインしていなければLOGIN_URLに遷移する（settings.pyで指定）
+@login_required  # ログインしているかどうかの確認
 def listfunc(request):
     # BoardModelにあるデータを全て取ってくる
     object_list = BoardModel.objects.all()
     return render(request, 'list.html', {'object_list': object_list})
+
+
+def logoutfunc(request):
+    logout(request)
+    return redirect('login')

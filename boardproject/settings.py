@@ -137,3 +137,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # 画像はWebサーバーが行う
 # このURLを通して画像のやりとりを行う
 MEDIA_URL = '/media/'
+
+# ここはurls.pyで指定したnameを使うことができる
+LOGIN_URL = 'login'

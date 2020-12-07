@@ -19,5 +19,7 @@
     <a href="#" class="btn btn-secondary" role="button" aria-pressed="true">既読</a>
   </div>
   {% endfor %}
+  <!-- urls.pyのnameで指定したnameを使うことができる -->
+  <a href="{% url 'logout' %}">ログアウト</a>
 </div>
   {% endblock content %}
