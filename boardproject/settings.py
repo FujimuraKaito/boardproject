@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+# Djangoのバージョンによりimportする
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -118,4 +120,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# これは画像の時と同じくWebのどのURLに保存するかということ
 STATIC_URL = '/static/'
+
+# staticファイルを統合するためのURL（本番環境用）
+STATIC_ROOT = ''
+
+STATICFILES_DIRS = [
+    # cssファイルの場所を個別に設定していく
+    os.path.join(BASE_DIR, 'static')
+]
+
+# 画像をどこに保存するかを決める→ここではBASE_DIRのmediaディレクトリ
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 画像はWebサーバーが行う
+# このURLを通して画像のやりとりを行う
+MEDIA_URL = '/media/'
