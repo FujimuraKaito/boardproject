@@ -10,7 +10,7 @@ class BoardModel(models.Model):
     # pillowというモジュールをインストールしないといけない
     # sudo pip3 install pillow
     images = models.ImageField(upload_to='')
-    good = models.IntegerField()
-    read = models.IntegerField()
+    good = models.IntegerField(null=True, blank=True, default=0)
+    read = models.IntegerField(null=True, blank=True, default=0)
     # 既読をした人のユーザーネームを保存する
-    readtext = models.CharField(max_length=200)
+    readtext = models.CharField(max_length=200, null=True, blank=True, default='a')

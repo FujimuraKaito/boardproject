@@ -20,5 +20,6 @@
     <a href="{% url 'good' object.pk %}" class="btn btn-primary" role="button" aria-pressed="true">いいねする</a>
     <a href="{% url 'read' object.pk %}" class="btn btn-secondary" role="button" aria-pressed="true">既読にする</a>
   </div>
+  <a href="{% url 'list' %}">戻る</a>
 </div>
   {% endblock content %}

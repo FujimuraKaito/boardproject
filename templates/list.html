@@ -20,6 +20,8 @@
     <a href="#" class="btn btn-secondary" role="button" aria-pressed="true">既読：{{ item.read }}人</a>
   </div>
   {% endfor %}
+  <a href="{% url 'create' %}">新規作成</a>
+  |
   <!-- urls.pyのnameで指定したnameを使うことができる -->
   <a href="{% url 'logout' %}">ログアウト</a>
 </div>
