@@ -67,3 +67,32 @@ def listfunc(request):
 def logoutfunc(request):
     logout(request)
     return redirect('login')
+
+
+# どの投稿かを判別するためにpkも引数に加える
+def detailfunc(request, pk):
+    # 引数で受け取ったpkと等しいものをデータベースから取ってくる
+    object = BoardModel.objects.get(pk=pk)
+    return render(request, 'detail.html', {'object': object})
+
+
+def goodfunc(request, pk):
+    post = BoardModel.objects.get(pk=pk)
+    # いいねをインクリメントする
+    post.good += 1
+    # 更新したオブジェクトを保存する
+    post.save()
+    return redirect('list')
+
+
+def readfunc(request, pk):
+    post = BoardModel.objects.get(pk=pk)
+    # requestオブジェクトの中にログインしているユーザーの情報が入っている
+    post2 = request.user.get_username()
+    if post2 in post.readtext:
+        return redirect('list')
+    else:
+        post.read += 1
+        post.readtext = post.readtext + ' ' + post2
+        post.save()
+        return redirect('list')
